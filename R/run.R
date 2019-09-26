@@ -193,7 +193,7 @@ setMethod('run', signature(ssimObject = "BreakpointSession"), function(ssimObjec
     LogFileName = paste0(dirname(filepath(x@scenario)), "/parallelLog.txt")
     if (file.exists(LogFileName)) file.remove(LogFileName)
 
-    parallelCluster = parallel::makeCluster(jobs,outfile=LogFileName)
+    parallelCluster = parallel::makeForkCluster(jobs,outfile=LogFileName)
     parallel::clusterEvalQ(parallelCluster, library(rsyncrosim))
 
     #TO DO: catch error messages properly in parallel processing...
